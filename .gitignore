@@ -1,0 +1,5 @@
+# Git の管理に含めないファイルを指定するためのファイル https://qiita.com/inabe49/items/16ee3d9d1ce68daa9fff
+/old/
+/__pycache__/
+output
+/output/

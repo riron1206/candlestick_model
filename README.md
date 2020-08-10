@@ -7,6 +7,8 @@
 - 02_keras_pyライブラリも必要
 	- https://github.com/riron1206/02_keras_py
 
+![img_sample.png](https://github.com/riron1206/candlestick_model/blob/master/img_sample.png)
+
 ## ラベルの分け方かえていくつかモデル作ったが、以下のラベルを採用した
 - 予測実行日の1日後の始値 > 2日後の始値なら「0」
 - 予測実行日の1日後の始値 < 2日後の始値なら「1」

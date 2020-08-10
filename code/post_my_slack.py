@@ -27,15 +27,19 @@ def filter_df_2day_label(
     # 最新日だけ
     df = df[df["date_exe"] == df["date_exe"].max()]
 
+    df_result = None
     for i, df_g in df.groupby(["date_exe"]):
         if df_g.shape[0] > 0:
             df_g = df_g[
                 (df_g["pred_pb"] > th_pb)
                 & (df_g["2day_pred_y"] > 0)
-                & (df_g["date_exe_price"] > th_price)
+                & (df_g["date_exe_price"] < th_price)
             ]
-
-    return df_g
+            df_g = df_g.sort_values(by="pred_pb", ascending=False)
+            df_g = df_g.head(10)  # 10件に絞る
+            df_result = df_g
+    # print(df_result)
+    return df_result
 
 
 def post_slack(name, text, post_url):
@@ -64,5 +68,5 @@ if __name__ == "__main__":
     str_codes = map(str, codes)  # 格納される数値を文字列にする
     str_codes = ", ".join(str_codes)  # リストを文字列にする
     text = f"{str(date)} にシグナルが出た銘柄は {len(codes)} 件です。スコア大きい順に {str_codes} です。"
-    # print(text)
+    print(text)
     post_slack("2営業日後に上がりそうな株情報", text, post_url)

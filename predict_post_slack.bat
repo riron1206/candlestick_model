@@ -10,4 +10,4 @@ call python tf_predict_best_model.py -m D:\work\candlestick_model\output\model\t
 
 call python post_my_slack.py
 
-pause
+@rem pause

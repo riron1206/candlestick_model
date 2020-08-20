@@ -65,9 +65,15 @@ def post_filter_df_2day_label(
     date = df_result.iloc[0]["date_exe"].date()
     # print(date)
     codes = df_result["code"].to_list()
-    str_codes = map(str, codes)  # 格納される数値を文字列にする
-    str_codes = ", ".join(str_codes)  # リストを文字列にする
-    text = f"{str(date)} にシグナル出た銘柄上位 {len(codes)} 件。 {str_codes} "
+    # str_codes = map(str, codes)  # 格納される数値を文字列にする
+    # str_codes = ", ".join(str_codes)  # リストを文字列にする
+    text = f"{str(date)} にシグナル出た銘柄上位 {len(codes)} 件"  # {str_codes}"
+    for code in codes:
+        text = (
+            text
+            + "\n"
+            + f"https://stocks.finance.yahoo.co.jp/stocks/chart/?code={str(code)}.T"
+        )
     print(text)
     post_slack("2営業日後に上がりそうな株情報", text)
 
@@ -101,9 +107,15 @@ def post_filter_df_positive_negative_line_label(
     date = df_result.iloc[0]["date_exe"].date()
     # print(date)
     codes = df_result["code"].to_list()
-    str_codes = map(str, codes)  # 格納される数値を文字列にする
-    str_codes = ", ".join(str_codes)  # リストを文字列にする
-    text = f"{str(date)} にシグナル出た銘柄上位 {len(codes)} 件。 {str_codes} "
+    # str_codes = map(str, codes)  # 格納される数値を文字列にする
+    # str_codes = ", ".join(str_codes)  # リストを文字列にする
+    text = f"{str(date)} にシグナル出た銘柄上位 {len(codes)} 件"  # {str_codes}"
+    for code in codes:
+        text = (
+            text
+            + "\n"
+            + f"https://stocks.finance.yahoo.co.jp/stocks/chart/?code={str(code)}.T"
+        )
     print(text)
     post_slack("翌日が陽線になりそうな株情報", text)
 
